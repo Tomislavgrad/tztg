@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Turistička zajednica Općine Tomislavgrad</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2d5016;
+            --secondary: #4a7c2a;
+            --accent: #8db596;
+            --light: #f8f9fa;
+            --dark: #1a2c0d;
+            --text: #333333;
+            --text-light: #6c757d;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: var(--light);
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+
+        /* HEADER */
+        header {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            background-color: rgba(255, 255, 255, 0.98);
+            padding: 10px 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 0;
+        }
+
+        .logo span {
+            color: var(--secondary);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.3));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-top: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 0 20px;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: white;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: 2px solid var(--primary);
+        }
+
+        .btn:hover {
+            background-color: transparent;
+            color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid white;
+            color: white;
+            margin-left: 15px;
+        }
+
+        .btn-outline:hover {
+            background-color: white;
+            color: var(--primary);
+        }
+
+        /* SECTIONS */
+        section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--primary);
+        }
+
+        /* ABOUT */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            margin-bottom: 20px;
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            color: var(--text-light);
+        }
+
+        .about-image {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            height: 400px;
+            background-color: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+        }
+
+        /* HIGHLIGHTS */
+        .highlights {
+            background-color: #f8f9fa;
+        }
+
+        .highlight-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        .card-image {
+            height: 200px;
+            background-color: #dee2e6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+        }
+
+        .card-content {
+            padding: 25px;
+        }
+
+        .card h3 {
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        /* ACCOMMODATION */
+        .accommodation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .accommodation-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+        }
+
+        .accommodation-image {
+            height: 200px;
+            background-color: #dee2e6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+        }
+
+        .accommodation-info {
+            padding: 20px;
+        }
+
+        .accommodation-info h3 {
+            margin-bottom: 10px;
+        }
+
+        .accommodation-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* EVENTS */
+        .events {
+            background-color: #f8f9fa;
+        }
+
+        .events-timeline {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .event-item {
+            display: flex;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .event-date {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            min-width: 100px;
+            margin-right: 30px;
+            z-index: 2;
+        }
+
+        .event-day {
+            font-size: 2rem;
+            font-weight: bold;
+            display: block;
+        }
+
+        .event-month {
+            font-size: 1rem;
+            display: block;
+        }
+
+        .event-content {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            flex: 1;
+        }
+
+        .event-content h3 {
+            margin-bottom: 10px;
+        }
+
+        .event-location {
+            color: var(--text-light);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .event-location i {
+            margin-right: 8px;
+        }
+
+        /* GALLERY */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .gallery-item {
+            border-radius: 10px;
+            overflow: hidden;
+            height: 200px;
+            background-color: #dee2e6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+
+        /* CONTACT */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+
+        .contact-info h3 {
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .contact-details {
+            margin-bottom: 30px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .contact-icon {
+            background: var(--primary);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .contact-text h4 {
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+        }
+
+        .contact-form {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Poppins', sans-serif;
+            transition: border 0.3s;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        /* FOOTER */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 20px 30px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #adb5bd;
+            font-size: 0.9rem;
+        }
+
+        /* MAP */
+        .map-container {
+            height: 400px;
+            background-color: #e9ecef;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 992px) {
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .btn {
+                display: block;
+                margin-bottom: 10px;
+                width: 100%;
+                text-align: center;
+            }
+            
+            .btn-outline {
+                margin-left: 0;
+            }
+            
+            section {
+                padding: 60px 20px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .event-item {
+                flex-direction: column;
+            }
+            
+            .event-date {
+                margin-right: 0;
+                margin-bottom: 15px;
+                align-self: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header id="header">
+        <nav>
+            <div class="logo">
+                <h1>Tomislav<span>grad</span></h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Početna</a></li>
+                <li><a href="#about">O Tomislavgradu</a></li>
+                <li><a href="#highlights">Atrakcije</a></li>
+                <li><a href="#accommodation">Smještaj</a></li>
+                <li><a href="#events">Događaji</a></li>
+                <li><a href="#gallery">Galerija</a></li>
+                <li><a href="#contact">Kontakt</a></li>
+            </ul>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Dočekajte ljepotu Tomislavgrada</h1>
+            <p>Otkrijte čaroliju Duvanjskog polja, planine Vran i bogate kulturne baštine</p>
+            <div>
+                <a href="#about" class="btn">Istražite</a>
+                <a href="#contact" class="btn btn-outline">Kontaktirajte nas</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about">
+        <div class="section-title">
+            <h2>O Tomislavgradu</h2>
+            <p>Upoznajte bogatu historiju i prirodne ljepote našeg kraja</p>
+        </div>
+        <div class="about-content">
+            <div class="about-text">
+                <h2>Dragocjeno blago Hercegovine</h2>
+                <p>Tomislavgrad, smješten na nadmorskoj visini od 900 metara, predstavlja jedan od najznačajnijih turističkih centara zapadne Hercegovine. Okružen planinama Vran, Radušom i Bitovnjom, grad nudi predivan pogled na Duvanjsko polje.</p>
+                <p>Kroz historiju, ovaj kraj je bio naseljen još od ilirskog doba, a današnji naziv nosi u čast hrvatskog kralja Tomislava. Bogata kulturna baština, autentična gastronomija i gostoljubivi stanovnici čine Tomislavgrad idealnom destinacijom za sve ljubitelje prirode i tradicije.</p>
+                <a href="#highlights" class="btn">Otkrijte atrakcije</a>
+            </div>
+            <div class="about-image">
+                <!-- DODAJ SLIKU TOMISLAVGRADA -->
+                [SLIKA: Panorama Tomislavgrada]
+            </div>
+        </div>
+    </section>
+
+    <!-- HIGHLIGHTS SECTION -->
+    <section class="highlights" id="highlights">
+        <div class="section-title">
+            <h2>Turističke atrakcije</h2>
+            <p>Otkrijte najljepše prirodne i kulturne znamenitosti</p>
+        </div>
+        <div class="highlight-cards">
+            <div class="card">
+                <div class="card-image">
+                    <!-- DODAJ SLIKU -->
+                    [SLIKA: Duvanjsko polje]
+                </div>
+                <div class="card-content">
+                    <h3>Duvanjsko polje</h3>
+                    <p>Prostrano polje dugo 22 km, okruženo planinama, idealno za šetnje, biciklizam i uživanje u netaknutoj prirodi.</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-image">
+                    <!-- DODAJ SLIKU -->
+                    [SLIKA: Planina Vran]
+                </div>
+                <div class="card-content">
+                    <h3>Planina Vran</h3>
+                    <p>Najviši vrh (2074 m) nudi prekrasan pogled na cijelu regiju. Popularna destinacija za planinare i ljubitelje prirode.</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-image">
+                    <!-- DODAJ SLIKU -->
+                    [SLIKA: Crkva i stara jezgra]
+                </div>
+                <div class="card-content">
+                    <h3>Povijesna jezgra</h3>
+                    <p>Šetnja kroz povijesni centar grada otkriva bogatu arhitekturu i kulturnu baštinu stoljeća.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="map-container">
+            <!-- DODAJ INTERAKTIVNU KARTU -->
+            [INTERAKTIVNA KARTA TOMISLAVGRADA I OKOLICE]
+        </div>
+    </section>
+
+    <!-- ACCOMMODATION SECTION -->
+    <section id="accommodation">
+        <div class="section-title">
+            <h2>Smještaj</h2>
+            <p>Pronađite savršeno mjesto za odmor</p>
+        </div>
+        <div class="accommodation-grid">
+            <div class="accommodation-card">
+                <div class="accommodation-image">
+                    <!-- DODAJ SLIKU -->
+                    [SLIKA: Hotel]
+                </div>
+                <div class="accommodation-info">
+                    <h3>Hotel Tomislav</h3>
+                    <p>Modern hotel u srcu grada sa svim sadržajima za ugodan boravak.</p>
+                    <div class="accommodation-meta">
+                        <span><i class="fas fa-star"></i> 4.5</span>
+                        <span><i class="fas fa-euro-sign"></i> Od 70€</span>
+                    </div>
+                </div>
+            </div>
+            <div class="accommodation-card">
+                <div class="accommodation-image">
+                    <!-- DODAJ SLIKU -->
+                    [SLIKA: Seoski turizam]
+                </div>
+                <div class="accommodation-info">
+                    <h3>Seosko domaćinstvo</h3>
+                    <p>Autentično iskustvo života na selu sa domaćom hranom i tradicijom.</p>
+                    <div class="accommodation-meta">
+                        <span><i class="fas fa-star"></i> 4.8</span>
+                        <span><i class="fas fa-euro-sign"></i> Od 40€</span>
+                    </div>
+                </div>
+            </div>
+            <div class="accommodation-card">
+                <div class="accommodation-image">
+                    <!-- DODAJ SLIKU -->
+                    [SLIKA: Apartmani]
+                </div>
+                <div class="accommodation-info">
+                    <h3>Apartmani Duvanjsko</h3>
+                    <p>Udobni apartmani sa pogledom na polje, idealni za obitelji.</p>
+                    <div class="accommodation-meta">
+                        <span><i class="fas fa-star"></i> 4.6</span>
+                        <span><i class="fas fa-euro-sign"></i> Od 50€</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EVENTS SECTION -->
+    <section class="events" id="events">
+        <div class="section-title">
+            <h2>Događaji i manifestacije</h2>
+            <p>Budite dio bogatog kulturnog života Tomislavgrada</p>
+        </div>
+        <div class="events-timeline">
+            <div class="event-item">
+                <div class="event-date">
+                    <span class="event-day">15</span>
+                    <span class="event-month">Lip</span>
+                </div>
+                <div class="event-content">
+                    <h3>Duvanjsko ljeto</h3>
+                    <p class="event-location"><i class="fas fa-map-marker-alt"></i> Gradski trg, Tomislavgrad</p>
+                    <p>Godišnji kulturno-zabavni festival sa koncertima, izložbama i tradicionalnim specijalitetima.</p>
+                </div>
+            </div>
+            <div class="event-item">
+                <div class="event-date">
+                    <span class="event-day">08</span>
+                    <span class="event-month">Kol</span>
+                </div>
+                <div class="event-content">
+                    <h3>Planinarski maraton Vran</h3>
+                    <p class="event-location"><i class="fas fa-map-marker-alt"></i> Planina Vran</p>
+                    <p>Takmičenje planinara na najvišem vrhu regije sa predivnim pogledima na Hercegovinu.</p>
+                </div>
+            </div>
+            <div class="event-item">
+                <div class="event-date">
+                    <span class="event-day">20</span>
+                    <span class="event-month">Ruj</span>
+                </div>
+                <div class="event-content">
+                    <h3>Jesenski sajam</h3>
+                    <p class="event-location"><i class="fas fa-map-marker-alt"></i> Sajmište, Tomislavgrad</p>
+                    <p>Tradicionalni sajam poljoprivrednih proizvoda, zanatskih proizvoda i lokalnih specijaliteta.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALLERY SECTION -->
+    <section id="gallery">
+        <div class="section-title">
+            <h2>Galerija</h2>
+            <p>Pogledajte ljepotu Tomislavgrada kroz objektiv</p>
+        </div>
+        <div class="gallery-grid">
+            <div class="gallery-item">[SLIKA 1: Priroda]</div>
+            <div class="gallery-item">[SLIKA 2: Grad]</div>
+            <div class="gallery-item">[SLIKA 3: Kultura]</div>
+            <div class="gallery-item">[SLIKA 4: Planine]</div>
+            <div class="gallery-item">[SLIKA 5: Znamenitosti]</div>
+            <div class="gallery-item">[SLIKA 6: Događaji]</div>
+            <div class="gallery-item">[SLIKA 7: Gastronomija]</div>
+            <div class="gallery-item">[SLIKA 8: Aktivnosti]</div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact">
+        <div class="section-title">
+            <h2>Kontakt</h2>
+            <p>Stupite u kontakt s Turističkom zajednicom</p>
+        </div>
+        <div class="contact-container">
+            <div class="contact-info">
+                <h3>Informacije</h3>
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>Adresa</h4>
+                            <p>Trg Kralja Tomislava 12<br>80240 Tomislavgrad, BiH</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>Telefon</h4>
+                            <p>+387 34 123 456</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>Email</h4>
+                            <p>info@tz-tomislavgrad.ba</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>Radno vrijeme</h4>
+                            <p>Pon - Pet: 08:00 - 16:00<br>Subota: 09:00 - 13:00</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-tripadvisor"></i></a>
+                </div>
+            </div>
+            <div class="contact-form">
+                <h3>Pošaljite poruku</h3>
+                <form>
+                    <div class="form-group">
+                        <label for="name">Ime i prezime</label>
+                        <input type="text" id="name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email adresa</label>
+                        <input type="email" id="email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Predmet</label>
+                        <input type="text" id="subject" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Poruka</label>
+                        <textarea id="message" class="form-control" required></textarea>
+                    </div>
+                    <button type="submit" class="btn" style="width: 100%;">Pošalji poruku</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Turistička zajednica</h3>
+                <p>Turistička zajednica Općine Tomislavgrad posvećena je promociji turističkog potencijala našeg prekrasnog kraja.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Brzi linkovi</h3>
+                <ul class="footer-links">
+                    <li><a href="#home">Početna</a></li>
+                    <li><a href="#about">O Tomislavgradu</a></li>
+                    <li><a href="#highlights">Atrakcije</a></li>
+                    <li><a href="#accommodation">Smještaj</a></li>
+                    <li><a href="#events">Događaji</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Korisni linkovi</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Turistički vodiči</a></li>
+                    <li><a href="#">Mapa i transport</a></li>
+                    <li><a href="#">Vremenska prognoza</a></li>
+                    <li><a href="#">Kultura i historija</a></li>
+                    <li><a href="#">Gastronomija</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Newsletter</h3>
+                <p>Prijavite se na naš newsletter za najnovije informacije o događajima i ponudama.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="email" class="form-control" placeholder="Vaš email" required>
+                    </div>
+                    <button type="submit" class="btn" style="width: 100%; margin-top: 10px;">Prijavi se</button>
+                </form>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2024 Turistička zajednica Općine Tomislavgrad. Sva prava zadržana.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+
+        // Simple form submission
+        document.querySelectorAll('form').forEach(form => {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Hvala Vam na poruci! Odgovorit ćemo u najkraćem mogućem roku.');
+                this.reset();
+            });
+        });
+    </script>
+</body>
+</html>
